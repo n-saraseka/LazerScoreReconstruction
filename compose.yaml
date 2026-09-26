@@ -1,0 +1,9 @@
+﻿services:
+  score-reconstruction:
+    build:
+      context: .
+      dockerfile: LazerScoreReconstruction/Dockerfile
+    env_file: .env
+    volumes:
+      - ./output:/app/output
+
