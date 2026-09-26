@@ -26,7 +26,7 @@ public static class Utils
         var totalScoreWithoutMods = score.TotalScoreWithoutMods;
         var statistics = score.Statistics;
         
-        var bonusPortion = statistics.SmallBonus ?? 0 * 10 + statistics.LargeBonus ?? 0 * 50;
+        var bonusPortion = (statistics.SmallBonus ?? 0) * 10 + (statistics.LargeBonus ?? 0) * 50;
         
         return totalScoreWithoutMods - bonusPortion - accuracyPortion;
     }
@@ -35,16 +35,16 @@ public static class Utils
 
     private static double GetStatSumFromStatistics(ScoreStatistics statistics)
     {
-        var statSum = 0;
+        var statSum = 0.0;
         
-        statSum += statistics.Meh ?? 0 * 50;
-        statSum += statistics.Ok ?? 0 * 100;
-        statSum += statistics.Good ?? 0 * 200;
-        statSum += statistics.Great ?? 0 * 300;
-        statSum += statistics.Perfect ?? 0 * 300;
-        statSum += statistics.SmallTickHit ?? 0 * 10;
-        statSum += statistics.LargeTickHit ?? 0 * 30;
-        statSum += statistics.SliderTailHit ?? 0 * 150;
+        statSum += (statistics.Meh ?? 0) * 50;
+        statSum += (statistics.Ok ?? 0) * 100;
+        statSum += (statistics.Good ?? 0) * 200;
+        statSum += (statistics.Great ?? 0) * 300;
+        statSum += (statistics.Perfect ?? 0) * 300;
+        statSum += (statistics.SmallTickHit ?? 0) * 10;
+        statSum += (statistics.LargeTickHit ?? 0) * 30;
+        statSum += (statistics.SliderTailHit ?? 0) * 150;
         
         return statSum;
     }

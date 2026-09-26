@@ -77,7 +77,7 @@ while (scoresCount < scoresSample)
         {
             var accuracy = Utils.GetAccuracyFromScore(score);
             var accPortion = Utils.GetAccuracyPortion(accuracy);
-            var comboPortion = Utils.GetComboPortion(accuracy, score);
+            var comboPortion = Utils.GetComboPortion(accPortion, score);
             var comboScore = Utils.GetComboScore(accuracy, comboPortion);
             scoresData.Add(new ScoreData
             {
