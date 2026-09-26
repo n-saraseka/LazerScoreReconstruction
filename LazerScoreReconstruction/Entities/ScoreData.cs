@@ -1,8 +1,11 @@
+using osu.NET.Enums;
+
 namespace LazerScoreReconstruction.Entities;
 
 public class ScoreData
 {
     public long Id { get; set; }
+    public Ruleset Ruleset { get; set; }
     public int TotalScoreWithoutMods { get; set; }
     public int Combo { get; set; }
     public int BeatmapMaxCombo { get; set; }
