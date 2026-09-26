@@ -60,7 +60,10 @@ while (scoresCount < scoresSample)
     await Task.Delay(TimeSpan.FromSeconds(1));
     cursor = searchResult.Value!.Cursor;
     var beatmapsets = searchResult.Value!.Sets;
-    var beatmaps = beatmapsets.SelectMany(b => b.Beatmaps).ToList();
+    var beatmaps = beatmapsets
+        .SelectMany(b => b.Beatmaps)
+        .Where(b => b.Ruleset != Ruleset.Mania)
+        .ToList();
 
     for (var i = 0; i < beatmaps.Count && scoresCount < scoresSample; i++)
     {
