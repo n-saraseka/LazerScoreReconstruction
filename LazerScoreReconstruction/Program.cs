@@ -70,7 +70,6 @@ while (scoresCount < scoresSample)
                                                     && s.Statistics.LargeTickMiss == null
                                                     && s.Statistics.Miss == null
                                                     && s.TotalScoreWithoutMods > 0).ToList();
-        logger.LogInformation("Found {scoresCount} relevant scores", scores.Count);
         if (scores.Count == 0) continue;
         scoresCount += scores.Count;
         var beatmapCombo = (int)beatmaps[i].MaxCombo!;
@@ -97,6 +96,7 @@ while (scoresCount < scoresSample)
         }
         await csv.WriteRecordsAsync(scoresData);
     }
+    logger.LogInformation("Scores count: {scoresCount}", scoresCount);
 }
 
 
