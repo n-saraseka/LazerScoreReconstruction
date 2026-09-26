@@ -66,10 +66,14 @@ while (scoresCount < scoresSample)
     {
         var scoresResult = await osuApiClient.GetBeatmapScoresAsync(beatmaps[i].Id);
         await Task.Delay(TimeSpan.FromSeconds(1));
-        var scores = scoresResult.Value!.Where(s => s.IsPerfectCombo && s.LegacyTotalScore == 0).ToList();
+        var scores = scoresResult.Value!.Where(s => s.LegacyTotalScore == 0
+                                                    && s.Statistics.LargeTickMiss == null
+                                                    && s.Statistics.Miss == null
+                                                    && s.TotalScoreWithoutMods > 0).ToList();
         logger.LogInformation("Found {scoresCount} relevant scores", scores.Count);
         if (scores.Count == 0) continue;
         scoresCount += scores.Count;
+        var beatmapCombo = (int)beatmaps[i].MaxCombo!;
 
         var scoresData = new List<ScoreData>();
 
@@ -84,6 +88,7 @@ while (scoresCount < scoresSample)
                 Id = score.Id,
                 TotalScoreWithoutMods = score.TotalScoreWithoutMods,
                 Accuracy = accuracy,
+                BeatmapMaxCombo = beatmapCombo,
                 Combo = score.MaxCombo,
                 AccuracyPortion = accPortion,
                 ComboPortion = comboPortion,
