@@ -14,8 +14,8 @@ public static class Utils
         var statistics = score.Statistics;
         var maximumStatistics = score.MaximumStatistics;
 
-        var scoreStatSum = GetStatSumFromStatistics(statistics, score.Ruleset);
-        var scoreMaxStatSum = GetStatSumFromStatistics(maximumStatistics, score.Ruleset);
+        var scoreStatSum = GetStatSumFromStatistics(statistics);
+        var scoreMaxStatSum = GetStatSumFromStatistics(maximumStatistics);
         
         return scoreStatSum / scoreMaxStatSum;
     }
@@ -34,17 +34,17 @@ public static class Utils
     
     public static double GetComboScore(double accuracy, double comboPortion) => comboPortion / (accuracy * ComboScorePortion);
 
-    private static double GetStatSumFromStatistics(ScoreStatistics statistics, Ruleset ruleset)
+    private static double GetStatSumFromStatistics(ScoreStatistics statistics)
     {
         var statSum = 0.0;
         
         statSum += (statistics.Meh ?? 0) * 50;
-        statSum += (statistics.Ok ?? 0) * (ruleset != Ruleset.Taiko ? 100 : 150);
+        statSum += (statistics.Ok ?? 0) * 100;
         statSum += (statistics.Good ?? 0) * 200;
         statSum += (statistics.Great ?? 0) * 300;
-        statSum += (statistics.Perfect ?? 0) * (ruleset != Ruleset.Mania ? 300 : 305);
-        statSum += (statistics.SmallTickHit ?? 0) * (ruleset != Ruleset.Catch ? 10 : 300);
-        statSum += (statistics.LargeTickHit ?? 0) * (ruleset != Ruleset.Catch ? 30 : 300);
+        statSum += (statistics.Perfect ?? 0) * 300;
+        statSum += (statistics.SmallTickHit ?? 0) * 10;
+        statSum += (statistics.LargeTickHit ?? 0) * 30;
         statSum += (statistics.SliderTailHit ?? 0) * 150;
         
         return statSum;

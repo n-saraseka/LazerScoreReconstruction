@@ -56,13 +56,13 @@ await using var csv = new CsvWriter(writer, csvConfig);
 
 while (scoresCount < scoresSample)
 {
-    var searchResult = await osuApiClient.SearchBeatmapSetsAsync(sortType: SearchSortType.RankedDescending, cursor: cursor);
+    var searchResult = await osuApiClient.SearchBeatmapSetsAsync(sortType: SearchSortType.RankedDescending, ruleset: Ruleset.Osu, cursor: cursor);
     await Task.Delay(TimeSpan.FromSeconds(1));
     cursor = searchResult.Value!.Cursor;
     var beatmapsets = searchResult.Value!.Sets;
     var beatmaps = beatmapsets
         .SelectMany(b => b.Beatmaps)
-        .Where(b => b.Ruleset != Ruleset.Mania)
+        .Where(b => b.Ruleset == Ruleset.Osu)
         .ToList();
 
     for (var i = 0; i < beatmaps.Count && scoresCount < scoresSample; i++)
