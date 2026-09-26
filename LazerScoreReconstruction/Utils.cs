@@ -39,7 +39,7 @@ public static class Utils
         var statSum = 0.0;
         
         statSum += (statistics.Meh ?? 0) * 50;
-        statSum += (statistics.Ok ?? 0) * (ruleset != Ruleset.Taiko ? 300 : 150);
+        statSum += (statistics.Ok ?? 0) * (ruleset != Ruleset.Taiko ? 100 : 150);
         statSum += (statistics.Good ?? 0) * 200;
         statSum += (statistics.Great ?? 0) * 300;
         statSum += (statistics.Perfect ?? 0) * (ruleset != Ruleset.Mania ? 300 : 305);
